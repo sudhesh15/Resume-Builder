@@ -33,6 +33,7 @@ export default class SignUp extends Component {
     })
       .then((res) => res.json())
       .then((data) => {
+        alert("Sign Up Successful. Please Redirect to Sign In Page.")
         console.log(data, "userRegister");
       });
   }

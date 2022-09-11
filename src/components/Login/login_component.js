@@ -13,8 +13,14 @@ export default class Login extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const { email, password } = this.state;
+    if(email === ""){
+      alert("Please Enter Email");
+    } else if(password === ""){
+      alert("Please Enter Password")
+    }
     console.log(email, password);
-    fetch("http://localhost:5000/login-user", {
+    if(email != ""  && password != ""){
+      fetch("http://localhost:5000/login-user", {
       method: "POST",
       crossDomain: true,
       headers: {
@@ -31,11 +37,13 @@ export default class Login extends Component {
       .then((data) => {
         console.log(data, "userRegister");
         if (data.status == "ok") {
-          alert("login successful");
+          alert("Login Successful");
+          window.localStorage.setItem("email", email)
           window.localStorage.setItem("token", data.data);
           window.location.href = "./ResumeBuilder/";
         }
       });
+    }
   }
   render() {
     return (
