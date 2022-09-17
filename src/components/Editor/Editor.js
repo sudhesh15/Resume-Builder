@@ -5,19 +5,55 @@ import InputControl from "../InputControl/InputControl";
 
 import styles from "./Editor.module.css";
 import axios from 'axios';
+var fetchedResumeData = [];
+var fetchedBasicInfo;
+var fetchedWorkExp;
+var fetchedProjectData;
+var fetchedEducationData;
+var fetchedAchivementData;
+var fetchedSummaryData;
+var fetchedOthersData;
 
 console.log("++++++++++++++++++++", `getResumeData?useId=${window.localStorage.getItem("email")}`)
 
-fetch(`/getResumeData?useId=${window.localStorage.getItem("email")}`).then((response) => console.log("hi",response))
+
+//fetch(`/getResumeData/${window.localStorage.getItem("email")}`).then((response) => console.log("hi",response))
 //.then((data) => console.log(data));
 
 function Editor(props) {
-  const sections = props.sections;
-  const information = props.information;
+  useEffect(()=>{
+    fetch(`http://localhost:5000/getResumeData/${window.localStorage.getItem("email")}`, {
+        method: "GET",
+        crossDomain: true,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Origin": "*",
+        }
+      })
+      .then((response) => {
+        return response.text()
+      }).then(function(data) {
+        fetchedResumeData = JSON.parse(data);
+        console.log(JSON.parse(data))
+        console.log(fetchedResumeData[Object.keys(fetchedResumeData)[0]].basicInfo[0])
+        fetchedBasicInfo = fetchedResumeData[Object.keys(fetchedResumeData)[0]].basicInfo[0]
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [])
 
+  const sections = props.sections;
   const [activeSectionKey, setActiveSectionKey] = useState(
     Object.keys(sections)[0]
   );
+
+
+  
+  const information = props.information;
+
+  
   const [activeInformation, setActiveInformation] = useState(
     information[sections[Object.keys(sections)[0]]]
   );

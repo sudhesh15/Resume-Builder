@@ -224,9 +224,9 @@ app.post("/reset-password/:id/:token", async (req, res) => {
 })*/
 
 app.get("/getResumeData/:userId", async (req, res) => {
-  console.log("req.query", req.query.userId);
+  //console.log("req.query", req.query.userId);
   console.log("req.params", req.params.userId);
-  let userId = req.query.userId;
+  let userId = req.params.userId;
   resumeData.find(({userId: userId}), function(err, val){
     res.send(val);
   })
