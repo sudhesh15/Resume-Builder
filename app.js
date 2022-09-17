@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const router= require('express').Router();
 const mongoose = require("mongoose");
 app.use(express.json());
 const cors = require("cors");
@@ -71,6 +72,19 @@ try {
   res.send({ status: "error" });
 }
 });
+
+/*app.get("/fetchResumeData/:userId", async (req, res) => {
+  try {
+    console.log("+++++++++++++++", req.query.userId, req.params.userId)
+    let userId = req.params.userId;
+    await resumeData.find(({userId: userId}), function(err, val){
+    res.send(val);
+  })
+    res.send({ status: "ok" });
+  } catch (error) {
+    res.send({ status: "error" });
+  }
+});*/
 
 app.post("/login-user", async (req, res) => {
   const { email, password } = req.body;
@@ -200,11 +214,20 @@ app.post("/reset-password/:id/:token", async (req, res) => {
   }
 });
 
-app.get('/fetchResumeData', function(req,res){
+/*app.get('/fetchResumeData').get((req, res) =>{
   console.log("req.query", req.query.userId);
   console.log("req.params", req.params.userId);
   let userId = req.query.userId;
   resumeData.find(({userId: userId}), function(err, val){
     res.send(val);
   })
-})
+})*/
+
+app.get("/getResumeData/:userId", async (req, res) => {
+  console.log("req.query", req.query.userId);
+  console.log("req.params", req.params.userId);
+  let userId = req.query.userId;
+  resumeData.find(({userId: userId}), function(err, val){
+    res.send(val);
+  })
+});

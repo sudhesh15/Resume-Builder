@@ -4,8 +4,11 @@ import { X } from "react-feather";
 import InputControl from "../InputControl/InputControl";
 
 import styles from "./Editor.module.css";
+import axios from 'axios';
 
-fetch(`/fetchResumeData?useId=${window.localStorage.getItem("email")}`).then((response) => console.log("hi",response))
+console.log("++++++++++++++++++++", `getResumeData?useId=${window.localStorage.getItem("email")}`)
+
+fetch(`/getResumeData?useId=${window.localStorage.getItem("email")}`).then((response) => console.log("hi",response))
 //.then((data) => console.log(data));
 
 function Editor(props) {
