@@ -713,7 +713,7 @@ function Editor(props) {
 
       <div className={styles.body}>
         <InputControl
-          label="Title"
+          label="Section Title"
           placeholder="Enter section title"
           value={sectionTitle}
           onChange={(event) => setSectionTitle(event.target.value)}
