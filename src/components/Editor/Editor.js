@@ -4,7 +4,7 @@ import { X } from "react-feather";
 import InputControl from "../InputControl/InputControl";
 
 import styles from "./Editor.module.css";
-import axios from 'axios';
+
 var fetchedResumeData = [];
 var fetchedBasicInfo;
 var fetchedWorkExp;
